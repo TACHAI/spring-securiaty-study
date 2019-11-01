@@ -1,5 +1,7 @@
 package com.laishishui.springsecuritystudy.Controller;
 
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +18,11 @@ public class DemoController {
     public String home(){
         return "hello spring boot";
     }
-
+//    @PreAuthorize("#id<10 or principal.username.equals(#username)")
+    @PreAuthorize("hasRole('ROLE_ADMIN')or hasRole('ROLE_USER')")
+    @PostAuthorize("hasRole('')")
     @RequestMapping("/hello")
-    public String hello(){
+    public String hello(Integer id,String username){
         return "hello world";
     }
 }
